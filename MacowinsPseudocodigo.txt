@@ -1,0 +1,92 @@
+class Local{
+	
+	var fecha
+	const ventas = []
+	
+	method vender(venta){
+
+	}
+	
+	method ganancias(dia){
+
+	}
+}
+
+class Venta{
+	
+	var fecha
+	var prendas = []
+	
+	method agregarPrenda(Prenda prenda){
+		
+		prendas.add(prenda)
+	}
+	
+	method cantidadPrendasVendidas(){
+		
+
+	}
+	
+	method precioVenta(){
+		
+
+	}
+	
+	method sumaPreciosPrendas(){
+		
+
+	}
+}
+
+class VentaConTarjeta inherits VentaEnEfectivo{
+
+	var cantidadCuotas
+	var coeficiente
+	
+	override method precioVenta(){
+		
+
+	}
+}
+
+class Prenda{
+	
+	double precioBase
+	Estado estadoActual
+	
+	method precio(){
+		
+
+	}
+}
+
+interface Estado{
+	
+	method precioSegun(precioBase)
+}
+
+class Nueva implements Estado{
+
+	method precioSegun(precioBase){
+		
+
+	}
+}
+
+class Promocion implements Estado{
+	
+	const valorFijo
+	
+	method precioSegun(precioBase){
+		
+
+	}
+}
+
+class Liquidacion implements Estado{
+
+	method precioSegun(precioBase){
+		
+
+	}
+}
