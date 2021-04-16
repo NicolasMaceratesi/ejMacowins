@@ -1,15 +1,10 @@
 class Local{
-	
-	var fecha
+
 	const ventas = []
 	
-	method vender(venta){
-
-	}
+	method vender(venta) = ventas.add(venta)
 	
-	method ganancias(dia){
-
-	}
+	method ganancias() = ventas.sum(venta => venta.precioVenta())
 }
 
 class Venta{
@@ -17,76 +12,51 @@ class Venta{
 	var fecha
 	var prendas = []
 	
-	method agregarPrenda(Prenda prenda){
-		
-		prendas.add(prenda)
-	}
-	
-	method cantidadPrendasVendidas(){
-		
+	method agregarPrenda(Prenda prenda) = prendas.add(prenda)
 
-	}
+	method quitarPrenda(prenda) = prendas.remove(prenda)
 	
-	method precioVenta(){
-		
-
-	}
+	method cantidadPrendasVendidas() = prendas.size()
 	
-	method sumaPreciosPrendas(){
-		
-
-	}
+	method importeVenta() = self.sumaDePreciosDePrendas()
+	
+	method sumaPreciosPrendas() = prendas.sum(prenda -> prenda.precio())
 }
 
 class VentaConTarjeta inherits VentaEnEfectivo{
 
-	var cantidadCuotas
-	var coeficiente
+	const cuotas
+	const coeficiente
 	
-	override method precioVenta(){
-		
-
-	}
+	override method importeVenta() = super() + cuotas * coeficiente + 0.01 * self.sumaPreciosPrendas()
 }
 
 class Prenda{
 	
-	double precioBase
-	Estado estadoActual
+	const precioPropio
+	var estado
 	
-	method precio(){
-		
-
-	}
+	method precio() = estadoActual.precioSegunEstado(precioPropio)
 }
 
 interface Estado{
 	
-	method precioSegun(precioBase)
+	method precioSegun(precioPropio)
 }
 
 class Nueva implements Estado{
 
-	method precioSegun(precioBase){
-		
-
-	}
+	method precioSegunEstado(precioPropio) = precioPropio
 }
 
 class Promocion implements Estado{
 	
-	const valorFijo
+	const valor
 	
-	method precioSegun(precioBase){
-		
-
-	}
+	method precioSegunEstado(precioPropio) = 0.max(precioPropio - valorFijo)
 }
 
 class Liquidacion implements Estado{
 
-	method precioSegun(precioBase){
-		
-
-	}
+	method precioSegunEstado(precioPropio) = 0.5 * precioPropio
 }
